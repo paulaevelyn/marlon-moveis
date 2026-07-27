@@ -162,38 +162,27 @@
   .trust-row li{display:flex; align-items:center; gap:8px; list-style:none;}
   .trust-row li::before{content:"●"; color:var(--safety); font-size:0.55rem;}
 
-  /* hero visual: torque-mark badge, stylized, no real photo */
+  /* hero visual: real personal photo with floating badge */
   .hero-visual{
     position:relative;
-    aspect-ratio:1/1.05;
-    background:
-      radial-gradient(circle at 30% 25%, rgba(255,180,0,0.14), transparent 55%),
-      linear-gradient(160deg, var(--charcoal-2), #120e0c);
-    border:1px solid var(--line);
+    aspect-ratio:4/5;
     border-radius:var(--radius);
-    display:flex; align-items:center; justify-content:center;
-  }
-  .badge{
-    width:78%; aspect-ratio:1;
-    border-radius:50%;
-    border:2px dashed rgba(255,180,0,0.4);
-    display:flex; align-items:center; justify-content:center;
-    position:relative;
-    animation:spin 60s linear infinite;
-  }
-  @media (prefers-reduced-motion: reduce){ .badge{animation:none;} }
-  @keyframes spin{ to{ transform:rotate(360deg); } }
-  .badge-inner{
-    width:82%; aspect-ratio:1; border-radius:50%;
-    background:var(--charcoal);
+    overflow:hidden;
     border:1px solid var(--line);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center;
-    animation:spin-rev 60s linear infinite;
+    box-shadow:0 24px 60px rgba(0,0,0,0.5);
   }
-  @keyframes spin-rev{ to{ transform:rotate(-360deg); } }
-  .badge-inner .num{font-family:'Archivo Black',sans-serif; font-size:2.6rem; color:var(--safety);}
-  .badge-inner .cap{font-family:'Barlow Condensed',sans-serif; text-transform:uppercase; letter-spacing:0.1em; font-size:0.85rem; color:var(--steel); margin-top:4px; max-width:60%;}
+  .hero-photo{width:100%; height:100%; object-fit:cover; display:block;}
+  .hero-photo-badge{
+    position:absolute; left:20px; bottom:20px;
+    background:rgba(10,9,7,0.72);
+    backdrop-filter:blur(4px);
+    border:1px solid rgba(255,180,0,0.35);
+    border-radius:var(--radius);
+    padding:14px 20px;
+    text-align:left;
+  }
+  .hero-photo-badge .num{font-family:'Archivo Black',sans-serif; font-size:1.8rem; color:var(--safety); line-height:1;}
+  .hero-photo-badge .cap{font-family:'Barlow Condensed',sans-serif; text-transform:uppercase; letter-spacing:0.06em; font-size:0.78rem; color:var(--steel); margin-top:4px; max-width:22ch;}
 
   /* ===== SECTION GENERIC ===== */
   section{padding:88px 0; position:relative; z-index:1;}
@@ -261,17 +250,23 @@
   /* ===== TESTIMONIAL-ish quote strip (placeholder invitation) ===== */
   .quote{
     border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    text-align:center;
+  }
+  .quote-grid{
+    display:flex; align-items:center; gap:40px; text-align:left;
+  }
+  @media (max-width:700px){ .quote-grid{flex-direction:column; text-align:center;} }
+  .quote-photo{
+    width:140px; height:140px; border-radius:50%; object-fit:cover; flex-shrink:0;
+    border:2px solid var(--safety);
   }
   .quote blockquote{
     font-family:'Archivo Black', sans-serif;
-    font-size:clamp(1.4rem,3vw,2.1rem);
+    font-size:clamp(1.3rem,2.6vw,1.9rem);
     text-transform:none;
-    max-width:820px; margin:0 auto;
     color:var(--cream);
   }
   .quote cite{
-    display:block; margin-top:20px; font-style:normal;
+    display:block; margin-top:16px; font-style:normal;
     font-family:'Barlow Condensed',sans-serif; color:var(--safety); text-transform:uppercase; letter-spacing:0.08em; font-size:0.9rem;
   }
 
@@ -376,7 +371,7 @@
 <header>
   <nav class="nav wrap">
     <div class="logo">
-      <img src="gallery/logo.jpg" alt="Marlon Montador de Móveis">
+      <img src="gallery/marlon-logo.jpg" alt="Marlon Montador de Móveis">
       MARLON<span>.</span>MÓVEIS
     </div>
     <div class="nav-links" id="navLinks">
@@ -416,11 +411,10 @@
         </ul>
       </div>
       <div class="hero-visual">
-        <div class="badge">
-          <div class="badge-inner">
-            <div class="num">100%</div>
-            <div class="cap">Profissionalismo do início ao fim</div>
-          </div>
+        <img src="gallery/marlon-hero.jpg" alt="Marlon, montador de móveis, na oficina" class="hero-photo">
+        <div class="hero-photo-badge">
+          <div class="num">100%</div>
+          <div class="cap">Profissionalismo do início ao fim</div>
         </div>
       </div>
     </div>
@@ -575,9 +569,12 @@
 
   <!-- QUOTE / INVITE -->
   <section class="quote">
-    <div class="wrap">
-      <blockquote>"Móvel bem montado não se percebe. Só se percebe o mal montado."</blockquote>
-      <cite>Marlon, sobre o próprio trabalho</cite>
+    <div class="wrap quote-grid">
+      <img src="gallery/marlon-thumbsup.jpg" alt="Marlon aprovando o trabalho" class="quote-photo">
+      <div>
+        <blockquote>"Móvel bem montado não se percebe. Só se percebe o mal montado."</blockquote>
+        <cite>Marlon, sobre o próprio trabalho</cite>
+      </div>
     </div>
   </section>
 
